@@ -21,7 +21,6 @@
     }
 
     overlay.className = 'vjs-ass';
-    overlay.style.height = screen.height + 'px';
     player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
 
     player.on('play', function() {
@@ -42,8 +41,10 @@
 
     function updateDisplayArea() {
       if (player.isFullscreen()) {
+        overlay.style.height = screen.height + 'px';
         renderer.resize(screen.width, screen.height);
       } else {
+        overlay.style.height = player.height() + 'px';
         renderer.resize(player.width(), player.height());
       }
     }

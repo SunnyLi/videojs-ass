@@ -8,6 +8,7 @@
   var vjs_ass = function (options) {
     var overlay = document.createElement('div'),
       clock = new libjass.renderers.ManualClock(),
+      delay = options.delay || 0,
       player = this,
       renderer = null;
 
@@ -36,7 +37,7 @@
     });
 
     player.on('timeupdate', function () {
-      clock.tick(player.currentTime());
+      clock.tick(player.currentTime() - delay);
     });
 
     function updateDisplayArea() {

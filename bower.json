@@ -1,0 +1,15 @@
+{
+  "name": "videojs-ass",
+  "version": "0.0.1",
+  "authors": [
+    "Sunny Li"
+  ],
+  "description": "ASS/SSA subtitle overlay for videojs",
+  "keywords": [
+    "videojs",
+    "subtitle",
+    "ASS",
+    "SSA"
+  ],
+  "license": "Apache-2.0"
+}

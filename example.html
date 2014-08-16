@@ -7,9 +7,6 @@
     <script src="node_modules/video.js/dist/video-js/video.js"></script>
     <script src="node_modules/libjass/libjass.js"></script>
     <style>
-      .libjass-subs {
-        z-index: 2147483647;
-      }
       /* fix and break some subs positioning.. */
       div.libjass-subs > div.layer > div > div {
         min-width: inherit !important;
@@ -30,7 +27,7 @@
         height: 400,
         plugins: {
           ass: {
-            'src': ["video/os.ass"]
+            'src': ["subs/os.ass"]
           }
         }
       });

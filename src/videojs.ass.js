@@ -12,7 +12,8 @@
       renderer = null;
 
     overlay.className = 'vjs-ass';
-//    player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
+    overlay.style.height = screen.height + 'px';
+    player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
 
     player.on('timeupdate', function () {
       clock.timeUpdate(player.currentTime());
@@ -41,9 +42,6 @@
 
         renderer = new libjass.renderers.WebRenderer(ass, clock, {}, overlay);
         updateDisplayArea();
-
-        player.el().parentElement.replaceChild(renderer.libjassSubsWrapper, player.el());
-        renderer.libjassSubsWrapper.insertBefore(player.el(), renderer.libjassSubsWrapper.firstElementChild);
       }
     }, false);
 

@@ -13,19 +13,30 @@
 
     // locate ass file source
     if (!options.src) {
-      var ass_element = player.el().querySelector('video ass');
-      if (!ass_element) {
+      options.src = player.el().querySelector('video ass').getAttribute('src');
+      if (!options.src) {
         return;
       }
-      options.src = ass_element.attributes.src.value;
     }
 
     overlay.className = 'vjs-ass';
     overlay.style.height = screen.height + 'px';
     player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
 
+    player.on('play', function() {
+      clock.play();
+    });
+
+    player.on('pause', function() {
+      clock.pause();
+    });
+
+    player.on('ended', function() {
+      clock.stop();
+    });
+
     player.on('timeupdate', function () {
-      clock.timeUpdate(player.currentTime());
+      clock.tick(player.currentTime());
     });
 
     function updateDisplayArea() {
@@ -42,16 +53,14 @@
     var subsRequest = new XMLHttpRequest();
     subsRequest.open("GET", options.src, true);
 
-    subsRequest.addEventListener("readystatechange", function () {
-      if (subsRequest.readyState === XMLHttpRequest.DONE) {
-        var ass = libjass.ASS.fromString(
-          subsRequest.responseText,
-          libjass.Format.ASS
-        );
+    subsRequest.addEventListener("load", function () {
+      var ass = libjass.ASS.fromString(
+        subsRequest.responseText,
+        libjass.Format.ASS
+      );
 
-        renderer = new libjass.renderers.WebRenderer(ass, clock, {}, overlay);
-        updateDisplayArea();
-      }
+      renderer = new libjass.renderers.WebRenderer(ass, clock, {}, overlay);
+      updateDisplayArea();
     }, false);
 
     subsRequest.send(null);

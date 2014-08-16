@@ -11,6 +11,15 @@
       player = this,
       renderer = null;
 
+    // locate ass file source
+    if (!options.src) {
+      var ass_element = player.el().querySelector('video ass');
+      if (!ass_element) {
+        return;
+      }
+      options.src = ass_element.attributes.src.value;
+    }
+
     overlay.className = 'vjs-ass';
     overlay.style.height = screen.height + 'px';
     player.el().insertBefore(overlay, player.el().firstChild.nextSibling);

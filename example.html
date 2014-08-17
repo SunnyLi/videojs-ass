@@ -2,18 +2,28 @@
 <html>
   <head>
     <title>Videojs ASS/SSA subtitles</title>
+
+    <!-- npm -->
     <link href="node_modules/video.js/dist/video-js/video-js.css" rel="stylesheet">
     <link href="node_modules/libjass/libjass.css" rel="stylesheet">
-    <link href="src/videojs.ass.css" rel="stylesheet">
     <script src="node_modules/video.js/dist/video-js/video.dev.js"></script>
     <script src="node_modules/libjass/libjass.js"></script>
+
+    <!-- bower-->
+    <link href="bower_components/videojs/dist/video-js/video-js.min.css" rel="stylesheet">
+    <link href="bower_components/libjass/libjass.css" rel="stylesheet">
+    <script src="bower_components/videojs/dist/video-js/video.dev.js"></script>
+    <script src="bower_components/libjass/libjass.js"></script>
+
+    <!-- src -->
+    <link href="src/videojs.ass.css" rel="stylesheet">
+    <script src="src/videojs.ass.js"></script>
   </head>
 
   <body>
     <video id="player" class="video-js vjs-default-skin vjs-big-play-centered">
       <source src="video/os.mp4" type="video/mp4">
     </video>
-    <script src="src/videojs.ass.js"></script>
     <script>
       videojs('player', {
         controls: true,

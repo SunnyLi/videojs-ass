@@ -2,6 +2,8 @@
  * Copyright (c) 2014 Sunny Li
  * Licensed under the Apache-2.0 license. */
 
+document.createElement('ass');
+
 (function (videojs, libjass) {
   'use strict';
 
@@ -14,7 +16,7 @@
 
     // locate ass file source
     if (!options.src) {
-      options.src = player.el().querySelector('video ass').getAttribute('src');
+      options.src = player.el().querySelector('video>ass').getAttribute('src');
       if (!options.src) {
         return;
       }
@@ -66,6 +68,36 @@
     }, false);
 
     subsRequest.send(null);
+
+    // Visibility Toggle Button
+    if (typeof(options.button) == 'undefined' || options.button) {
+      videojs.AssButton = videojs.Button.extend();
+
+      videojs.AssButton.prototype.onClick = function () {
+        if (!/inactive/.test(this.el().className)) {
+          this.el().className += ' inactive';
+          overlay.style.display = "none";
+        } else {
+          this.el().className = this.el().className.replace(/\s?inactive/, '');
+          overlay.style.display = "";
+        }
+      };
+
+      player.controlBar.el().appendChild(
+        new videojs.AssButton(this, { 'el': createAssButton() }).el()
+      );
+    }
+
+    function createAssButton() {
+      var props = {
+        className: 'vjs-ass-button vjs-control',
+        role: 'button',
+        'aria-label': 'ASS subtitle toggle',
+        'aria-live': 'polite',
+        tabIndex: 0
+      };
+      return videojs.Component.prototype.createEl(null, props);
+    }
   };
 
   videojs.plugin('ass', vjs_ass);

@@ -4,7 +4,8 @@
     <title>Videojs ASS/SSA subtitles</title>
     <link href="node_modules/video.js/dist/video-js/video-js.css" rel="stylesheet">
     <link href="node_modules/libjass/libjass.css" rel="stylesheet">
-    <script src="node_modules/video.js/dist/video-js/video.js"></script>
+    <link href="src/videojs.ass.css" rel="stylesheet">
+    <script src="node_modules/video.js/dist/video-js/video.dev.js"></script>
     <script src="node_modules/libjass/libjass.js"></script>
   </head>
 
@@ -18,7 +19,7 @@
         controls: true,
         nativeControlsForTouch: false,
         width: 640,
-        height: 400,
+        height: 360,
         plugins: {
           ass: {
             'src': ["subs/os.ass"]

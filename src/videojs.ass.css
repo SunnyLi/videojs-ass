@@ -1,0 +1,17 @@
+.vjs-ass {
+  pointer-events: none;
+}
+
+.vjs-default-skin .vjs-ass-button {
+  width: 2em;
+  cursor: pointer;
+  float: right;
+}
+
+.vjs-default-skin .vjs-ass-button:before {
+  content: '\e00c';
+}
+
+.vjs-default-skin .vjs-ass-button.inactive {
+  color: grey;
+}

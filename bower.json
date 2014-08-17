@@ -20,7 +20,7 @@
     "node_modules",
     "bower_components",
     "example.html"
-  ]
+  ],
   "dependencies": {
     "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.7.0/libjass.zip"
   },

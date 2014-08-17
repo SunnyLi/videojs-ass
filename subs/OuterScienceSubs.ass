@@ -1,0 +1,114 @@
+﻿[Script Info]
+Title: Default Aegisub file
+ScriptType: v4.00+
+WrapStyle: 2
+PlayResX: 640
+PlayResY: 480
+ScaledBorderAndShadow: yes
+Video File: OuterScienceAVI.avi
+Video Aspect Ratio: 0
+Video Zoom: 4
+Video Position: 6487
+Last Style Storage: Default
+Collisions: Normal
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Small,Gisha,20,&H00D2FDFD,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,10,10,10,1
+Style: Title,Aharoni,48,&H00D2FDFD,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,10,10,10,1
+Style: Science,Gisha,24,&H00B4EAED,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,0,0,2,10,10,10,1
+Style: Outer,Gisha,36,&H00FDFDFD,&H000000FF,&H6055F0FC,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:10.04,0:00:10.28,Small,,0000,0000,0000,,{\pos(320,270)\fad(50,0)\c&HF2FFFF&\t(0,210,\fs18)}If you love him,
+Dialogue: 0,0:00:10.31,0:00:10.54,Small,,0000,0000,0000,,{\pos(320,270)\fad(50,0)\c&HF2FFFF&\t(0,210,\fs18)}use your monstrous {\b1}power.
+Dialogue: 0,0:00:11.18,0:00:20.84,Title,,0000,0000,0000,,{\move(320,200,330,230)\fad(200,200)\b1\fs48\t(0,9680,\fs24)\frz-4\t(0,9680,\frz-8)}OUTER {\frz4\t(0,9680,\frz-16)}SCIENCE
+Dialogue: 0,0:00:21.18,0:00:21.71,Title,,0000,0000,0000,,{\pos(90,200)\fad(50,50)\c&H000000&}CONCEAL
+Dialogue: 0,0:00:21.18,0:00:21.71,Title,,0000,0000,0000,,{\pos(520,200)\fad(50,50)\c&H000000&}STEAL
+Dialogue: 0,0:00:21.81,0:00:22.31,Title,,0000,0000,0000,,{\pos(90,200)\fad(50,50)\c&H77AABB&}DECEIVE
+Dialogue: 0,0:00:21.81,0:00:22.31,Title,,0000,0000,0000,,{\pos(540,200)\fad(50,50)\c&H77AABB&}CAPTIVATE
+Dialogue: 0,0:00:22.41,0:00:22.94,Title,,0000,0000,0000,,{\pos(90,200)\fad(50,50)\c&H000000&}OPEN
+Dialogue: 0,0:00:22.41,0:00:22.94,Title,,0000,0000,0000,,{\pos(520,200)\fad(50,50)\c&H000000&}XX
+Dialogue: 0,0:00:23.04,0:00:23.58,Title,,0000,0000,0000,,{\pos(90,200)\fad(50,50)\c&H77AABB&}FOCUS
+Dialogue: 0,0:00:23.04,0:00:23.58,Title,,0000,0000,0000,,{\pos(560,200)\fad(50,50)\c&H77AABB&}WAKE
+Dialogue: 0,0:00:23.58,0:00:24.21,Title,,0000,0000,0000,,{\pos(340,210)\fs32\frz-32\fad(200,50)\c&H1B1089&}MEET
+Dialogue: 0,0:00:24.24,0:00:24.81,Small,,0000,0000,0000,,{\move(138,221,148,224)\fad(50,50)\blur2}I don't care for a world
+Dialogue: 0,0:00:24.24,0:00:24.81,Small,,0000,0000,0000,,{\move(523,224,518,224)\fad(50,50)\blur2}without all of you...
+Dialogue: 0,0:00:31.11,0:00:35.48,Science,,0000,0000,0000,,{\move(180,330,50,330)\blur1.5\alpha&H11&\fad(50,2400)}A life lived puny\Nand miserably;
+Dialogue: 0,0:00:33.48,0:00:35.48,Science,,0000,0000,0000,,{\move(440,380,410,380)\blur1.5\alpha&H11&\fad(100,100)}once dead, should it not\Nknock at the door?
+Dialogue: 0,0:00:35.91,0:00:37.81,Science,,0000,0000,0000,,{\move(380,280,360,280)\blur1.5\alpha&H11&\fad(100,100)}The little\Nmaster watches\Nattentively;
+Dialogue: 0,0:00:37.91,0:00:39.51,Science,,0000,0000,0000,,{\pos(470,300)\blur2\fad(100,100)}"What loathsome tales."
+Dialogue: 0,0:00:40.98,0:00:45.21,Science,,0000,0000,0000,,{\move(320,280,340,280)\blur1.5\alpha&H11&\fad(50,50)}A large-reaching throat\Nand body, as if dissolving\Na dead heart,
+Dialogue: 0,0:00:45.58,0:00:47.78,Science,,0000,0000,0000,,{\pos(360,460)\fad(100,10)\c&H000000&\blur10\t(0,1600,\blur3)}slowly gulp down life,
+Dialogue: 0,0:00:47.91,0:00:49.38,Science,,0000,0000,0000,,{\pos(170,260)\blur1\c&H0FCDE5&\fad(100,50)}gouging out eyes...
+Dialogue: 0,0:00:50.78,0:00:53.81,Science,,0000,0000,0000,,{\fad(100,100)}Say, you wished for it too, didn't you?
+Dialogue: 0,0:00:53.81,0:00:55.54,Science,,0000,0000,0000,,{\pos(320,260)}In that moment I glared at you...
+Dialogue: 0,0:00:56.21,0:00:58.14,Science,,0000,0000,0000,,{\pos(320,360)\fs32\fad(100,100)}Such tragic souls
+Dialogue: 0,0:00:59.54,0:01:00.14,Science,,0000,0000,0000,,{\pos(320,300)\fs128\blur4\t(0,100,\fs36\blur1)\t(100,580,\fs34)\fad(50,0)}are my favorite meal...
+Dialogue: 0,0:01:00.51,0:01:02.61,Outer,,0000,0000,0000,,{\fad(200,200)\blur4}Welcome to my {\c&H1649FF&}womb{\r\blur4},
+Dialogue: 0,0:01:02.94,0:01:03.48,Science,,0000,0000,0000,,{\pos(200,470)\alpha&H22&\fs64\fad(50,50)}love
+Dialogue: 0,0:01:03.48,0:01:04.04,Science,,0000,0000,0000,,{\pos(460,310)\fs32\c&H140BA0&\alpha&H22&\fad(0,100)}and ego's
+Dialogue: 0,0:01:04.04,0:01:05.04,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}love and ego's final destination
+Dialogue: 0,0:01:05.24,0:01:07.51,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}You too will soon be born anew;
+Dialogue: 0,0:01:07.84,0:01:08.64,Science,,0000,0000,0000,,{\pos(180,260)\fs64\bord1\c&H000000&\blur4\3c&H0D089D&}is it not\Nfantastic,
+Dialogue: 0,0:01:08.94,0:01:10.21,Outer,,0000,0000,0000,,{\pos(330,300)\blur2\fs36\fad(50,100)\frz1}is {\frz0}it {\frz1}not {\frz-1}fan{\frz1}tas{\frz-1}tic, {\frz1}to {\frz-1}be {\frz1}like {\frz-1}a {\frz1}mon{\frz0}ster?
+Dialogue: 0,0:01:10.38,0:01:12.54,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}"Oh, god, why?", hm?
+Dialogue: 0,0:01:12.78,0:01:13.34,Science,,0000,0000,0000,,{\pos(320,280)\fad(50,50)\fsp1\c&H2215FE&}"I don't want it,"
+Dialogue: 0,0:01:13.34,0:01:14.94,Outer,,0000,0000,0000,,{\fad(50,200)\blur4}"I don't want it," you cry
+Dialogue: 0,0:01:15.11,0:01:17.11,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}Merely accept it - this is fate!
+Dialogue: 0,0:01:17.18,0:01:18.98,Outer,,0000,0000,0000,,{\fad(50,200)\blur4\3c&H000000&\c&H5B98A5&}The next, next, next master,
+Dialogue: 0,0:01:18.98,0:01:19.78,Science,,0000,0000,0000,,{\pos(320,450)\fs64\c&H110DAD&\fad(100,100)}I eagerly await...
+Dialogue: 0,0:01:30.11,0:01:34.51,Science,,0000,0000,0000,,{\move(180,270,130,270)\blur1.5\alpha&H11&\fad(50,50)}Myths, lives, the\Ndestinies of people,\Neven carelessly\Nfalling in love...
+Dialogue: 0,0:01:34.98,0:01:36.84,Science,,0000,0000,0000,,{\move(530,296,500,296)\alpha&H44&}The quiet\N{\c&H07E4FE&}snake{\r\alpha&H44&}\Nlaughs\Nloud:
+Dialogue: 0,0:01:36.94,0:01:37.94,Science,,0000,0000,0000,,{\pos(240,360)\blur2\fad(100,100)}"Such foolish things."
+Dialogue: 0,0:01:40.01,0:01:40.31,Science,,0000,0000,0000,,{\pos(410,240)\fad(50,50)\fs28\alpha&H11&\blur2}Ahh, I just can't
+Dialogue: 0,0:01:41.04,0:01:41.88,Science,,0000,0000,0000,,{\pos(410,350)\fad(50,50)\fs28\alpha&H11&\blur2}Ahh, I just can't\Nseem to get enough;
+Dialogue: 0,0:01:42.28,0:01:44.14,Science,,0000,0000,0000,,{\pos(390,320)\fad(50,200)\fs28\alpha&H11&\blur2}putting down\Ndarkened hearts,
+Dialogue: 0,0:01:44.94,0:01:47.21,Science,,0000,0000,0000,,{\pos(320,290)\alpha&H66&\fad(100,50)}possessing their little lives,
+Dialogue: 0,0:01:47.24,0:01:49.41,Science,,0000,0000,0000,,{\pos(320,290)\fad(0,50)\c&H110EC7&}embedding in their eyes...
+Dialogue: 0,0:01:49.64,0:01:49.94,Science,,0000,0000,0000,,{\move(320,540,320,150)}Ahh, it dwells in you, does it not?
+Dialogue: 0,0:01:49.94,0:01:52.81,Science,,0000,0000,0000,,{\move(320,150,320,80)}Ahh, it dwells in you, does it not?
+Dialogue: 0,0:01:52.84,0:01:53.34,Science,,0000,0000,0000,,{\pos(320,350)\c&H000000&\fad(50,0)}The ability of meeting eyes...
+Dialogue: 0,0:01:52.84,0:01:53.34,Science,,0000,0000,0000,,{\pos(320,390)\frx180\c&H000000&\fad(50,0)}The fate of unifying eyes...
+Dialogue: 0,0:01:53.98,0:01:54.61,Science,,0000,0000,0000,,{\pos(320,350)\c&H000000&\fad(50,50)}The ability of meeting eyes...
+Dialogue: 0,0:01:53.98,0:01:54.61,Science,,0000,0000,0000,,{\pos(320,390)\frx180\c&H000000&\fad(50,50)}The fate of unifying eyes...
+Dialogue: 0,0:01:54.64,0:01:55.04,Science,,0000,0000,0000,,{\move(320,134,320,122)\fad(0,100)}The fate of unifying eyes...
+Dialogue: 0,0:01:55.24,0:01:55.41,Science,,0000,0000,0000,,{\move(320,124,320,121)\fad(0,50)}In{\frz-1}deed, {\frz2}in {\frz-1}this {\frz2}tra{\frz1}ge{\frz2}dy,
+Dialogue: 0,0:01:55.41,0:01:57.18,Science,,0000,0000,0000,,{\move(320,121,320,110)\fad(0,50)}Indeed, in this tragedy,
+Dialogue: 0,0:01:58.58,0:01:59.18,Science,,0000,0000,0000,,{\pos(480,300)\fs36\fad(100,50)}you are the "queen"...
+Dialogue: 0,0:01:59.58,0:02:01.68,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}Lives, give praise;
+Dialogue: 0,0:02:01.98,0:02:02.51,Science,,0000,0000,0000,,{\pos(520,170)\alpha&H22&\c&H000000&\fs64\fad(50,0)}as love
+Dialogue: 0,0:02:02.51,0:02:03.08,Science,,0000,0000,0000,,{\pos(260,440)\fs96\c&H140BA0&\alpha&H22&\fad(0,50)}and ego
+Dialogue: 0,0:02:03.08,0:02:04.11,Outer,,0000,0000,0000,,{\fad(50,200)\blur4}as love and ego press hands together,
+Dialogue: 0,0:02:04.31,0:02:06.58,Outer,,0000,0000,0000,,{\fad(50,200)\blur4}the shaking days begin to crumble,
+Dialogue: 0,0:02:06.88,0:02:07.68,Science,,0000,0000,0000,,{\pos(520,320)\fs48\bord1\c&H000000&\blur4\3c&H0D089D&}and toward\Nthe initial\Ntragedy,
+Dialogue: 0,0:02:08.01,0:02:09.24,Outer,,0000,0000,0000,,{\pos(330,300)\blur2\fs36\fad(50,100)\frz1}and {\frz0}to{\frz1}ward {\frz-1}the {\frz1}i{\frz-1}ni{\frz1}tial {\frz-1}tra{\frz1}ge{\frz-1}dy, {\frz1}they {\frz0}pace {\frz1}to{\frz0}ge{\frz-1}ther...
+Dialogue: 0,0:02:09.48,0:02:11.48,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}"Give it back," you lament
+Dialogue: 0,0:02:11.84,0:02:12.91,Outer,,0000,0000,0000,,{\fad(100,50)\c&H000000&\blur4\3c&HBFFCFC&}"I've had enough," you wail
+Dialogue: 0,0:02:12.91,0:02:13.98,Outer,,0000,0000,0000,,{\fad(100,200)\blur4}"I've had enough," you wail
+Dialogue: 0,0:02:14.18,0:02:16.21,Outer,,0000,0000,0000,,{\fad(100,0)\blur4}You think I care? That is fate!
+Dialogue: 0,0:02:16.24,0:02:18.14,Outer,,0000,0000,0000,,{\fad(50,0)\blur4\3c&H000000&\c&H81ADA6&}This terrible, brittle, puny story
+Dialogue: 0,0:02:18.14,0:02:18.94,Science,,0000,0000,0000,,{\fad(50,100)\c&H2525B9&\fs32}is the real thing!
+Dialogue: 0,0:02:40.38,0:02:42.58,Science,,0000,0000,0000,,{\move(400,160,400,120)\c&H000000&\fad(0,50)}How idiotic\Nare your lives...
+Dialogue: 0,0:02:42.58,0:02:45.08,Science,,0000,0000,0000,,{\pos(320,300)\fs32\fad(0,50)}Time and time again, you resist,
+Dialogue: 0,0:02:45.08,0:02:47.54,Science,,0000,0000,0000,,{\pos(320,410)\bord2\blur4\3c&H9A8D0B&\fad(50,50)}beginning to revert to the same old story,
+Dialogue: 0,0:02:47.54,0:02:48.68,Science,,0000,0000,0000,,{\move(320,370,320,366)\fad(50,50)}recklessly, uncouthly,
+Dialogue: 0,0:02:48.71,0:02:48.98,Science,,0000,0000,0000,,{\pos(320,300)\fs48\t(0,80,\fs36)\t(80,260,\fs32)\fad(0,50)}crying,
+Dialogue: 0,0:02:49.01,0:02:49.31,Science,,0000,0000,0000,,{\pos(320,310)\alpha&H33&\fs56\t(0,80,\fs48)\t(80,260,\fs42)\fad(0,50)}weeping,
+Dialogue: 0,0:02:49.34,0:02:49.54,Science,,0000,0000,0000,,{\pos(320,330)\alpha&H66&\fs64\t(0,80,\fs56)\t(80,260,\fs42)\fad(0,50)}howling,
+Dialogue: 0,0:02:49.54,0:02:50.04,Science,,0000,0000,0000,,{\pos(320,430)\fs160\t(0,80,\fs144)\t(80,260,\fs128)\fad(50,50)\c&H0000FD&}writhing...
+Dialogue: 0,0:02:50.18,0:02:52.24,Outer,,0000,0000,0000,,{\3c&H000000&\blur4\fad(50,50)}Ahh, what {\c&H1B0EFD&}unsightly{\r\blur4\3c&H000000&} lives!
+Dialogue: 0,0:02:52.51,0:02:54.58,Outer,,0000,0000,0000,,{\3c&H000000&\blur4\fad(50,50)}Before you even ask "Why?"
+Dialogue: 0,0:02:54.88,0:02:56.78,Outer,,0000,0000,0000,,{\3c&H000000&\blur4\fad(50,0)}You demand too much - serve for your crime!
+Dialogue: 0,0:02:57.71,0:02:58.41,Outer,,0000,0000,0000,,{\pos(290,150)\3c&H000000&\blur4\frz8\fad(50,0)}A hollow {\frz4}miracle
+Dialogue: 0,0:02:58.48,0:02:59.58,Outer,,0000,0000,0000,,{\pos(320,300)\3c&H000000&\blur4\fsp0\t(0,1080,\fsp2)\fad(50,0)\frz1}sn{\frz-1}aps {\frz1}and {\fr-2}crum{\frz1}bles{\frz2}...
+Dialogue: 0,0:02:59.88,0:03:01.51,Science,,0000,0000,0000,,{\pos(330,220)\c&H000000&\blur1\fs30\frz1}"I, {\frz-1}I {\frz1}don't {\frz-1}ev{\frz1}en {\frz-1}care {\frz1}any{\frz-1}more";
+Dialogue: 0,0:03:02.38,0:03:04.04,Outer,,0000,0000,0000,,{\pos(489,206)\3c&H000000&\blur4\fs26\frz-4}a{\frz-3}gain {\frz-4}and {\frz-1}a{\frz-4}gain,\N{\frz-2}you {\frz-3}just {\frz-6}sit {\frz-5}and {\frz-2}cry
+Dialogue: 0,0:03:05.61,0:03:06.61,Science,,0000,0000,0000,,{\pos(320,310)\fs32\c&HFFFFFF&\blur1\fad(0,50)}As even the end immediately {\c&H1D06F1&}fades,
+Dialogue: 0,0:03:06.71,0:03:08.41,Science,,0000,0000,0000,,{\pos(320,310)\fs36\c&H0606FE&\blur1\fad(50,50)}The next, the next, the next {\r\fs36}to come,
+Dialogue: 0,0:03:08.41,0:03:09.68,Science,,0000,0000,0000,,{\pos(320,310)\fs36\c&H0606FE&\blur1\fad(50,50)}at the next, and the next {\r\fs36}day,
+Dialogue: 0,0:03:09.68,0:03:10.04,Science,,0000,0000,0000,,{\pos(320,310)\fs36\c&H0606FE&\blur1\fad(50,50)}and the next,
+Dialogue: 0,0:03:10.04,0:03:10.48,Science,,0000,0000,0000,,{\pos(320,350)\fs48\c&H0606FE&\blur1\fad(50,50)}and the next,
+Dialogue: 0,0:03:10.48,0:03:10.94,Science,,0000,0000,0000,,{\pos(320,450)\fs96\c&H0606FE&\blur1\fad(50,50)}and the next,
+Dialogue: 0,0:03:11.71,0:03:12.24,Science,,0000,0000,0000,,{\fad(50,50)\fs64}I'll still sneer...

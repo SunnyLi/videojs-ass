@@ -18,11 +18,13 @@
     <!-- src -->
     <link href="src/videojs.ass.css" rel="stylesheet">
     <script src="src/videojs.ass.js"></script>
+
+    <script src="node_modules/videojs-youtube/dist/vjs.youtube.js"></script>
   </head>
 
   <body>
+    <h2>Video.js x Advanced SubStation Alpha (libjass)</h2>
     <video id="player" class="video-js vjs-default-skin vjs-big-play-centered">
-      <source src="video/os.mp4" type="video/mp4">
     </video>
     <script>
       videojs('player', {
@@ -32,10 +34,23 @@
         height: 360,
         plugins: {
           ass: {
-            'src': ["subs/os.ass"]
+            'src': ["subs/OuterScienceSubs.ass"],
+            'delay': -0.45,
           }
-        }
+        },
+        techOrder: ["youtube"],
+        src: "https://www.youtube.com/watch?v=HswIHVN5D4o",
+        poster: false
       });
     </script>
+    <p>You can click on the word bubble on control bar to show/hide the subtitles.</p>
+    <p>You can also go into full screen mode, subtitles will be scaled up.</p>
+    <p>Subtitle by vgperson</p>
+    <p>
+      This demo displays a YouTube video using the videojs-youtube plugin,<br>
+      you'll need to have access to YouTube at your country/workplace
+      in order to see this demo.
+    </p>
+    <a href="https://github.com/SunnyLi/videojs-ass/">Get back to repo</a>
   </body>
 </html>

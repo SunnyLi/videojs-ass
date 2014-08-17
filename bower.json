@@ -1,6 +1,6 @@
 {
   "name": "videojs-ass",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "authors": [
     "Sunny Li"
   ],
@@ -12,6 +12,15 @@
     "SSA"
   ],
   "license": "Apache-2.0",
+  "main": [
+    "./src/videojs.ass.js",
+    "./src/videojs.ass.css"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "example.html"
+  ]
   "dependencies": {
     "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.7.0/libjass.zip"
   },

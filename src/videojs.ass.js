@@ -38,11 +38,7 @@ document.createElement('ass');
     });
 
     player.on('timeupdate', function () {
-      if (typeof(clock.tick) != 'undefined') {
-        clock.tick(player.currentTime() - delay);
-      } else {
-        clock.timeUpdate(player.currentTime() - delay);
-      }
+      clock.tick(player.currentTime() - delay);
     });
 
     function updateDisplayArea() {

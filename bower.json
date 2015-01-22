@@ -1,6 +1,6 @@
 {
   "name": "videojs-ass",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "authors": [
     "Sunny Li"
   ],
@@ -22,9 +22,9 @@
     "example.html"
   ],
   "dependencies": {
-    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.8.0/libjass.zip"
+    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.9.0/libjass.zip"
   },
   "devDependencies": {
-    "videojs": "~4.7.2"
+    "videojs": "^4.7.2"
   }
 }

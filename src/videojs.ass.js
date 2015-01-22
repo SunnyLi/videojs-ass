@@ -58,13 +58,17 @@ document.createElement('ass');
     subsRequest.open("GET", options.src, true);
 
     subsRequest.addEventListener("load", function () {
-      var ass = libjass.ASS.fromString(
+      var assPromise = libjass.ASS.fromString(
         subsRequest.responseText,
         libjass.Format.ASS
       );
 
-      renderer = new libjass.renderers.WebRenderer(ass, clock, {}, overlay);
-      updateDisplayArea();
+      assPromise.then(
+        function (ass) {
+          renderer = new libjass.renderers.WebRenderer(ass, clock, overlay);
+          updateDisplayArea();
+        }
+      );
     }, false);
 
     subsRequest.send(null);

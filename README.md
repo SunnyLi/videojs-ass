@@ -13,8 +13,7 @@ If you are not on a phone or using a very bad browser, come check out the demo
 
 ## Install
 
-You can get this plugin using bower or npm,
-the latter will build libjass from source
+You can get this plugin using either bower or npm:
 
 `bower install videojs-ass`
 
@@ -34,3 +33,12 @@ videojs('player_id', {
   }
 }
 ```
+
+| Option     | Default    | Description                                        |
+| ---------- | ---------- | -------------------------------------------------- |
+| src        | required   | `.ass` / `.ssa` source.                            |
+| button     | true       | subtitle display toggle button on video bar        |
+| delay      | 0          | delay in seconds, can be negative.                 |
+| enableSvg  | true       | see [here][svg-effects] regarding SVG filter       |
+
+[svg-effects]: https://github.com/Arnavion/libjass/blob/v0.10.0/README.md#what-browser-and-javascript-features-does-libjass-need

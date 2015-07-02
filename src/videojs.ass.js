@@ -2,17 +2,16 @@
  * Copyright (c) 2014 Sunny Li
  * Licensed under the Apache-2.0 license. */
 
-document.createElement('ass');
-
 (function (videojs, libjass) {
   'use strict';
 
   var vjs_ass = function (options) {
     var overlay = document.createElement('div'),
-      clock = new libjass.renderers.ManualClock(),
+      clock = null,
       delay = options.delay || 0,
       player = this,
-      renderer = null;
+      renderer = null,
+      subsRequest = new XMLHttpRequest();
 
     // locate ass file source
     if (!options.src) {
@@ -25,20 +24,22 @@ document.createElement('ass');
     overlay.className = 'vjs-ass';
     player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
 
-    player.on('play', function() {
+    function getCurrentTime() {
+      return player.currentTime() - delay;
+    }
+    
+    clock = new libjass.renderers.AutoClock(getCurrentTime, 100);
+    
+    player.on('play', function () {
       clock.play();
     });
 
-    player.on('pause', function() {
+    player.on('pause', function () {
       clock.pause();
     });
 
-    player.on('ended', function() {
-      clock.stop();
-    });
-
-    player.on('timeupdate', function () {
-      clock.tick(player.currentTime() - delay);
+    player.on('seeking', function () {
+      clock.seeking();
     });
 
     function updateDisplayArea() {
@@ -54,9 +55,7 @@ document.createElement('ass');
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
-    var subsRequest = new XMLHttpRequest();
     subsRequest.open("GET", options.src, true);
-
     subsRequest.addEventListener("load", function () {
       var assPromise = libjass.ASS.fromString(
         subsRequest.responseText,
@@ -65,7 +64,12 @@ document.createElement('ass');
 
       assPromise.then(
         function (ass) {
-          renderer = new libjass.renderers.WebRenderer(ass, clock, overlay);
+          var rendererSettings = new libjass.renderers.RendererSettings();
+          if (options.hasOwnProperty('enableSvg')) {
+            rendererSettings.enableSvg = options.enableSvg;
+          }
+          
+          renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
           updateDisplayArea();
         }
       );
@@ -73,8 +77,19 @@ document.createElement('ass');
 
     subsRequest.send(null);
 
+    function createAssButton() {
+      var props = {
+        className: 'vjs-ass-button vjs-control',
+        role: 'button',
+        'aria-label': 'ASS subtitle toggle',
+        'aria-live': 'polite',
+        tabIndex: 0
+      };
+      return videojs.Component.prototype.createEl(null, props);
+    }
+
     // Visibility Toggle Button
-    if (typeof(options.button) == 'undefined' || options.button) {
+    if (!options.hasOwnProperty('button') || options.button) {
       videojs.AssButton = videojs.Button.extend();
 
       videojs.AssButton.prototype.onClick = function () {
@@ -90,17 +105,6 @@ document.createElement('ass');
       player.controlBar.el().appendChild(
         new videojs.AssButton(this, { 'el': createAssButton() }).el()
       );
-    }
-
-    function createAssButton() {
-      var props = {
-        className: 'vjs-ass-button vjs-control',
-        role: 'button',
-        'aria-label': 'ASS subtitle toggle',
-        'aria-live': 'polite',
-        tabIndex: 0
-      };
-      return videojs.Component.prototype.createEl(null, props);
     }
   };
 

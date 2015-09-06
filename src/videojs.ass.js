@@ -13,12 +13,8 @@
       renderer = null,
       subsRequest = new XMLHttpRequest();
 
-    // locate ass file source
     if (!options.src) {
-      options.src = player.el().querySelector('video>ass').getAttribute('src');
-      if (!options.src) {
-        return;
-      }
+      return;
     }
 
     overlay.className = 'vjs-ass';
@@ -27,9 +23,13 @@
     function getCurrentTime() {
       return player.currentTime() - delay;
     }
-    
+
     clock = new libjass.renderers.AutoClock(getCurrentTime, 100);
     
+    if (options.rate) {
+      clock.setRate(options.rate);
+    }
+
     player.on('play', function () {
       clock.play();
     });
@@ -68,7 +68,7 @@
           if (options.hasOwnProperty('enableSvg')) {
             rendererSettings.enableSvg = options.enableSvg;
           }
-          
+
           renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
           updateDisplayArea();
         }

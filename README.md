@@ -34,11 +34,17 @@ videojs('player_id', {
 }
 ```
 
-| Option     | Default    | Description                                        |
-| ---------- | ---------- | -------------------------------------------------- |
-| src        | required   | `.ass` / `.ssa` source.                            |
-| button     | true       | subtitle display toggle button on video bar        |
-| delay      | 0          | delay in seconds, can be negative.                 |
-| enableSvg  | true       | see [here][svg-effects] regarding SVG filter       |
+| Option     | Default       | Description                                        |
+| ---------- | ------------- | -------------------------------------------------- |
+| src        | -<sup>1</sup> | `.ass` / `.ssa` source.                            |
+| button     | true          | subtitle display toggle button on video bar        |
+| delay      | 0             | delay in seconds, can be negative.                 |
+| enableSvg  | true          | see [here][svg-effects] regarding SVG filter       |
+| rate       | -<sup>2</sup> | subtitle playback rate                             |
+
+**Footnotes:**
+
+1. This property is required!
+2. fallback to libjass default rate when not set.
 
 [svg-effects]: https://github.com/Arnavion/libjass/blob/v0.10.0/README.md#what-browser-and-javascript-features-does-libjass-need

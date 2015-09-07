@@ -7,6 +7,7 @@
 
   var vjs_ass = function (options) {
     var overlay = document.createElement('div'),
+      AssButton = null,
       clock = null,
       delay = options.delay || 0,
       player = this,
@@ -55,6 +56,10 @@
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
+    player.on('dispose', function () {
+      clock.disable();
+    });
+
     subsRequest.open("GET", options.src, true);
     subsRequest.addEventListener("load", function () {
       var assPromise = libjass.ASS.fromString(
@@ -90,9 +95,9 @@
 
     // Visibility Toggle Button
     if (!options.hasOwnProperty('button') || options.button) {
-      videojs.AssButton = videojs.Button.extend();
+      AssButton = videojs.Button.extend();
 
-      videojs.AssButton.prototype.onClick = function () {
+      AssButton.prototype.onClick = function () {
         if (!/inactive/.test(this.el().className)) {
           this.el().className += ' inactive';
           overlay.style.display = "none";
@@ -103,7 +108,7 @@
       };
 
       player.controlBar.el().appendChild(
-        new videojs.AssButton(this, { 'el': createAssButton() }).el()
+        new AssButton(this, { 'el': createAssButton() }).el()
       );
     }
   };

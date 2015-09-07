@@ -76,6 +76,12 @@
 
           renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
           updateDisplayArea();
+
+          // accessible through internal videojs plugins property
+          options.internal = {
+            clock: clock,
+            renderer: renderer
+          };
         }
       );
     }, false);
@@ -90,7 +96,7 @@
         'aria-live': 'polite',
         tabIndex: 0
       };
-      return videojs.Component.prototype.createEl(null, props);
+      return videojs.Component.prototype.createEl('div', props);
     }
 
     // Visibility Toggle Button
@@ -98,11 +104,11 @@
       AssButton = videojs.Button.extend();
 
       AssButton.prototype.onClick = function () {
-        if (!/inactive/.test(this.el().className)) {
-          this.el().className += ' inactive';
+        if (!this.hasClass('inactive')) {
+          this.addClass('inactive');
           overlay.style.display = "none";
         } else {
-          this.el().className = this.el().className.replace(/\s?inactive/, '');
+          this.removeClass('inactive');
           overlay.style.display = "";
         }
       };

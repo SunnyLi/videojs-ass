@@ -34,17 +34,17 @@ videojs('player_id', {
 }
 ```
 
-| Option     | Default       | Description                                        |
-| ---------- | ------------- | -------------------------------------------------- |
-| src        | -<sup>1</sup> | `.ass` / `.ssa` source.                            |
-| button     | true          | subtitle display toggle button on video bar        |
-| delay      | 0             | delay in seconds, can be negative.                 |
-| enableSvg  | true          | see [here][svg-effects] regarding SVG filter       |
-| rate       | -<sup>2</sup> | subtitle playback rate                             |
+| Option     | Default       | Description                                                |
+| ---------- | ------------- | ---------------------------------------------------------- |
+| src        | -<sup>1</sup> | `.ass` / `.ssa` source.                                    |
+| button     | true          | add subtitle display toggle button to video control bar    |
+| delay      | 0<sup>2</sup> | delay subtitle rendering by the specfied value in seconds  |
+| enableSvg  | true          | see [here][svg-effects] regarding SVG filter               |
+| rate       | 1             | subtitle update speed relative to video playback rate      |
 
 **Footnotes:**
 
 1. This property is required!
-2. fallback to libjass default rate when not set.
+2. Value can be negative
 
 [svg-effects]: https://github.com/Arnavion/libjass/blob/v0.10.0/README.md#what-browser-and-javascript-features-does-libjass-need

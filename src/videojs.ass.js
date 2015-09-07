@@ -9,6 +9,7 @@
     var overlay = document.createElement('div'),
       AssButton = null,
       clock = null,
+      clockRate = options.rate || 1,
       delay = options.delay || 0,
       player = this,
       renderer = null,
@@ -26,10 +27,6 @@
     }
 
     clock = new libjass.renderers.AutoClock(getCurrentTime, 100);
-    
-    if (options.rate) {
-      clock.setRate(options.rate);
-    }
 
     player.on('play', function () {
       clock.play();
@@ -42,6 +39,13 @@
     player.on('seeking', function () {
       clock.seeking();
     });
+
+    function updateClockRate() {
+      clock.setRate(player.playbackRate() * clockRate);
+    }
+    
+    updateClockRate();
+    player.on('ratechange', updateClockRate);
 
     function updateDisplayArea() {
       if (player.isFullscreen()) {

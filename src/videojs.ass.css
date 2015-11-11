@@ -3,9 +3,7 @@
 }
 
 .vjs-default-skin .vjs-ass-button {
-  width: 2em;
   cursor: pointer;
-  float: right;
 }
 
 .vjs-default-skin .vjs-ass-button:before {

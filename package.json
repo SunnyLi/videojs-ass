@@ -1,6 +1,6 @@
 {
   "name": "videojs-ass",
-  "version": "0.3.3",
+  "version": "0.5.0",
   "author": "Sunny Li",
   "description": "ASS/SSA subtitle overlay for videojs",
   "repository": {
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "videojs",
+    "videojs-plugin",
     "subtitle",
     "ASS",
     "SSA"
@@ -22,6 +23,6 @@
     "libjass": "0.10.0"
   },
   "devDependencies": {
-    "video.js": "^4.7.2"
+    "video.js": "5.x"
   }
 }

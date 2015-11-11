@@ -6,6 +6,7 @@
   "description": "ASS/SSA subtitle overlay for videojs",
   "keywords": [
     "videojs",
+    "videojs-plugin",
     "subtitle",
     "ASS",
     "SSA"
@@ -24,6 +25,6 @@
     "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.10.0/libjass.zip"
   },
   "devDependencies": {
-    "videojs": "^4.7.2"
+    "videojs": "5.x"
   }
 }

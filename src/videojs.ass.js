@@ -51,14 +51,16 @@
 
     function updateDisplayArea() {
       if (player.isFullscreen()) {
-        overlay.style.height = screen.height + 'px';
         renderer.resize(screen.width, screen.height);
       } else {
-        overlay.style.height = player.height() + 'px';
-        renderer.resize(player.width(), player.height());
+        renderer.resize(
+          player.width() || player.videoWidth(),
+          player.height() || player.videoHeight()
+        );
       }
     }
 
+    player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
@@ -81,7 +83,6 @@
           }
 
           renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
-          updateDisplayArea();
         }
       );
     }, false);
@@ -116,7 +117,7 @@
         player.controlBar.addChild(AssButtonInstance);
         player.controlBar.el().insertBefore(
           AssButtonInstance.el(),
-          player.controlBar.getChild('customControlSpacer').el()
+          player.controlBar.getChild('customControlSpacer').el().nextSibling
         );
       });
     }

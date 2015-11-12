@@ -7,7 +7,8 @@
 }
 
 .vjs-default-skin .vjs-ass-button:before {
-  content: '\e00c';
+  font-family: VideoJS;
+  content: '\f10c';
 }
 
 .vjs-default-skin .vjs-ass-button.inactive {

@@ -12,7 +12,6 @@
       delay = options.delay || 0,
       player = this,
       renderer = null,
-      subsRequest = new XMLHttpRequest(),
       AssButton = null,
       AssButtonInstance = null,
       VjsButton = null;
@@ -68,26 +67,16 @@
       clock.disable();
     });
 
-    subsRequest.open("GET", options.src, true);
-    subsRequest.addEventListener("load", function () {
-      var assPromise = libjass.ASS.fromString(
-        subsRequest.responseText,
-        libjass.Format.ASS
-      );
-
-      assPromise.then(
-        function (ass) {
-          var rendererSettings = new libjass.renderers.RendererSettings();
-          if (options.hasOwnProperty('enableSvg')) {
-            rendererSettings.enableSvg = options.enableSvg;
-          }
-
-          renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
+    libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(
+      function (ass) {
+        var rendererSettings = new libjass.renderers.RendererSettings();
+        if (options.hasOwnProperty('enableSvg')) {
+          rendererSettings.enableSvg = options.enableSvg;
         }
-      );
-    }, false);
 
-    subsRequest.send(null);
+        renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
+      }
+    );
 
     // Visibility Toggle Button
     if (!options.hasOwnProperty('button') || options.button) {

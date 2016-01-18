@@ -1,6 +1,6 @@
 {
   "name": "videojs-ass",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "author": "Sunny Li",
   "description": "ASS/SSA subtitle overlay for videojs",
   "repository": {

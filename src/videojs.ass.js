@@ -53,6 +53,10 @@
         renderer.resize(player.el().offsetWidth, player.el().offsetHeight);
       }, 100);
     }
+    
+    if (player.fluid()) {
+      window.addEventListener('resize', updateDisplayArea);
+    }
 
     player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);

@@ -49,14 +49,9 @@
     player.on('ratechange', updateClockRate);
 
     function updateDisplayArea() {
-      if (player.isFullscreen()) {
-        renderer.resize(screen.width, screen.height);
-      } else {
-        renderer.resize(
-          player.width() || player.videoWidth(),
-          player.height() || player.videoHeight()
-        );
-      }
+      setTimeout(function () {
+        renderer.resize(player.el().offsetWidth, player.el().offsetHeight);
+      }, 100);
     }
 
     player.on('loadedmetadata', updateDisplayArea);

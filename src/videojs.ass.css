@@ -20,3 +20,9 @@
 .vjs-default-skin .vjs-ass-button.inactive {
   color: grey;
 }
+
+/* Backport from libjass v0.11 */
+.libjass-subs, .libjass-subs * {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}

@@ -27,7 +27,7 @@
       return player.currentTime() - delay;
     }
 
-    clock = new libjass.renderers.AutoClock(getCurrentTime, 100);
+    clock = new libjass.renderers.AutoClock(getCurrentTime, 500);
 
     player.on('play', function () {
       clock.play();

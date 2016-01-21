@@ -72,6 +72,12 @@
         if (options.hasOwnProperty('enableSvg')) {
           rendererSettings.enableSvg = options.enableSvg;
         }
+        if (options.hasOwnProperty('fontMap')) {
+          rendererSettings.fontMap = new libjass.Map(options.fontMap);
+        } else if (options.hasOwnProperty('fontMapById')) {
+          rendererSettings.fontMap = libjass.renderers.RendererSettings
+            .makeFontMapFromStyleElement(document.getElementById(options.fontMapById));
+        }
 
         renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
       }

@@ -1,17 +1,28 @@
 .vjs-ass {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
   pointer-events: none;
 }
 
 .vjs-default-skin .vjs-ass-button {
-  width: 2em;
   cursor: pointer;
-  float: right;
 }
 
 .vjs-default-skin .vjs-ass-button:before {
-  content: '\e00c';
+  font-family: VideoJS;
+  content: '\f10c';
 }
 
 .vjs-default-skin .vjs-ass-button.inactive {
   color: grey;
+}
+
+/* Backport from libjass v0.11 */
+.libjass-subs, .libjass-subs * {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }

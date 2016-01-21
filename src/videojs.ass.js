@@ -2,105 +2,118 @@
  * Copyright (c) 2014 Sunny Li
  * Licensed under the Apache-2.0 license. */
 
-document.createElement('ass');
-
 (function (videojs, libjass) {
   'use strict';
 
   var vjs_ass = function (options) {
     var overlay = document.createElement('div'),
-      clock = new libjass.renderers.ManualClock(),
+      clock = null,
+      clockRate = options.rate || 1,
       delay = options.delay || 0,
       player = this,
-      renderer = null;
+      renderer = null,
+      AssButton = null,
+      AssButtonInstance = null,
+      VjsButton = null;
 
-    // locate ass file source
     if (!options.src) {
-      options.src = player.el().querySelector('video>ass').getAttribute('src');
-      if (!options.src) {
-        return;
-      }
+      return;
     }
 
     overlay.className = 'vjs-ass';
     player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
 
-    player.on('play', function() {
+    function getCurrentTime() {
+      return player.currentTime() - delay;
+    }
+
+    clock = new libjass.renderers.AutoClock(getCurrentTime, 500);
+
+    player.on('play', function () {
       clock.play();
     });
 
-    player.on('pause', function() {
+    player.on('pause', function () {
       clock.pause();
     });
 
-    player.on('ended', function() {
-      clock.stop();
+    player.on('seeking', function () {
+      clock.seeking();
     });
 
-    player.on('timeupdate', function () {
-      if (typeof(clock.tick) != 'undefined') {
-        clock.tick(player.currentTime() - delay);
-      } else {
-        clock.timeUpdate(player.currentTime() - delay);
-      }
-    });
+    function updateClockRate() {
+      clock.setRate(player.playbackRate() * clockRate);
+    }
+    
+    updateClockRate();
+    player.on('ratechange', updateClockRate);
 
     function updateDisplayArea() {
-      if (player.isFullscreen()) {
-        overlay.style.height = screen.height + 'px';
-        renderer.resize(screen.width, screen.height);
-      } else {
-        overlay.style.height = player.height() + 'px';
-        renderer.resize(player.width(), player.height());
-      }
+      setTimeout(function () {
+        renderer.resize(player.el().offsetWidth, player.el().offsetHeight);
+      }, 100);
+    }
+    
+    if (player.fluid()) {
+      window.addEventListener('resize', updateDisplayArea);
     }
 
+    player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
-    var subsRequest = new XMLHttpRequest();
-    subsRequest.open("GET", options.src, true);
+    player.on('dispose', function () {
+      clock.disable();
+    });
 
-    subsRequest.addEventListener("load", function () {
-      var ass = libjass.ASS.fromString(
-        subsRequest.responseText,
-        libjass.Format.ASS
-      );
+    libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(
+      function (ass) {
+        var rendererSettings = new libjass.renderers.RendererSettings();
+        if (options.hasOwnProperty('enableSvg')) {
+          rendererSettings.enableSvg = options.enableSvg;
+        }
+        if (options.hasOwnProperty('fontMap')) {
+          rendererSettings.fontMap = new libjass.Map(options.fontMap);
+        } else if (options.hasOwnProperty('fontMapById')) {
+          rendererSettings.fontMap = libjass.renderers.RendererSettings
+            .makeFontMapFromStyleElement(document.getElementById(options.fontMapById));
+        }
 
-      renderer = new libjass.renderers.WebRenderer(ass, clock, {}, overlay);
-      updateDisplayArea();
-    }, false);
-
-    subsRequest.send(null);
+        renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
+      }
+    );
 
     // Visibility Toggle Button
-    if (typeof(options.button) == 'undefined' || options.button) {
-      videojs.AssButton = videojs.Button.extend();
+    if (!options.hasOwnProperty('button') || options.button) {
+      VjsButton = videojs.getComponent('Button');
+      AssButton = videojs.extend(VjsButton, {
+        constructor: function (player, options) {
+          options.name = options.name || 'assToggleButton';
+          VjsButton.call(this, player, options);
 
-      videojs.AssButton.prototype.onClick = function () {
-        if (!/inactive/.test(this.el().className)) {
-          this.el().className += ' inactive';
-          overlay.style.display = "none";
-        } else {
-          this.el().className = this.el().className.replace(/\s?inactive/, '');
-          overlay.style.display = "";
+          this.addClass('vjs-ass-button');
+
+          this.on('click', this.onClick);
+        },
+        onClick: function () {
+          if (!this.hasClass('inactive')) {
+            this.addClass('inactive');
+            overlay.style.display = "none";
+          } else {
+            this.removeClass('inactive');
+            overlay.style.display = "";
+          }
         }
-      };
+      });
 
-      player.controlBar.el().appendChild(
-        new videojs.AssButton(this, { 'el': createAssButton() }).el()
-      );
-    }
-
-    function createAssButton() {
-      var props = {
-        className: 'vjs-ass-button vjs-control',
-        role: 'button',
-        'aria-label': 'ASS subtitle toggle',
-        'aria-live': 'polite',
-        tabIndex: 0
-      };
-      return videojs.Component.prototype.createEl(null, props);
+      player.ready(function () {
+        AssButtonInstance = new AssButton(player, options);
+        player.controlBar.addChild(AssButtonInstance);
+        player.controlBar.el().insertBefore(
+          AssButtonInstance.el(),
+          player.controlBar.getChild('customControlSpacer').el().nextSibling
+        );
+      });
     }
   };
 

@@ -3,69 +3,82 @@
   <head>
     <title>Videojs ASS/SSA subtitles</title>
 
-    <!-- npm -->
-    <link href="node_modules/video.js/dist/video-js/video-js.css" rel="stylesheet">
-    <link href="node_modules/libjass/libjass.css" rel="stylesheet">
-    <script src="node_modules/video.js/dist/video-js/video.dev.js"></script>
-    <script src="node_modules/libjass/libjass.js"></script>
-
     <!-- bower-->
-    <link href="bower_components/videojs/dist/video-js/video-js.min.css" rel="stylesheet">
-    <link href="bower_components/libjass/libjass.css" rel="stylesheet">
-    <script src="bower_components/videojs/dist/video-js/video.dev.js"></script>
-    <script src="bower_components/libjass/libjass.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.5.3/video-js.min.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/Arnavion/libjass/36f6600d6cc78daf29fe747f2cc0cb0a4f83ad41/demo/libjass.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.5.3/video.min.js"></script>
+    <script src="https://cdn.rawgit.com/Arnavion/libjass/36f6600d6cc78daf29fe747f2cc0cb0a4f83ad41/demo/libjass.js"></script>
 
     <!-- src -->
     <link href="src/videojs.ass.css" rel="stylesheet">
     <script src="src/videojs.ass.js"></script>
 
-    <script src="node_modules/videojs-youtube/dist/vjs.youtube.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/2.0.7/Youtube.min.js"></script>
   </head>
 
+  <style>
+    .header {
+      display: flex;
+      align-items: center;
+    }
+    
+    .back {
+      flex: 0;
+      margin: 0 1rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    
+    .player-wrapper {
+      width: 65%;
+    }
+    
+    @media screen and (max-device-width: 1200px) {
+      .player-wrapper {
+        width: 80%;
+      }
+    }
+    
+    @media screen and (min-device-width: 1600px) {
+      .player-wrapper {
+        width: 50%;
+      }
+    }
+  </style>
+  
   <body>
-    <h2>Video.js x Advanced SubStation Alpha (libjass)</h2>
-    <video id="player" class="video-js vjs-default-skin vjs-big-play-centered">
-    </video>
+    <div class="header">
+      <a class="back" href="https://github.com/SunnyLi/videojs-ass/">< Back</a>
+      <h2>Video.js x Advanced SubStation Alpha (libjass)</h2>
+    </div>
+    <div class="player-wrapper">
+      <video id="player" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+    </div>
     <script>
       videojs('player', {
         controls: true,
         nativeControlsForTouch: false,
         width: 640,
         height: 360,
+        fluid: true,
         plugins: {
           ass: {
             'src': ["subs/OuterScienceSubs.ass"],
-            'delay': -0.45,
+            'delay': -0.1,
           }
         },
         techOrder: ["youtube"],
-        src: "https://www.youtube.com/watch?v=HswIHVN5D4o",
-        poster: false
+        sources: [{"type": "video/youtube", "src": "https://www.youtube.com/watch?v=HswIHVN5D4o"}]
       });
     </script>
-    <p>You can click the word bubble on the control bar to hide/reveal the subtitle.</p>
-    <p>When in video full screen mode, subtitle will only show up for desktop browsers.</p>
+
+    <p>
+      You can click on the icon between time remaining and fullscreen button
+      on the videojs control bar to toggle subtitle visibility.
+    </p>
+
     <p>Subtitle by vgperson</p>
-    <p>
-      This demo loads a YouTube video using the videojs-youtube plugin,
-      you'll need to be able to access YouTube at your country/workplace
-      in order for this demo to work..
-    </p>
-    <p>
-      Additonal notice if you are viewing this on a mobile device:
-      <ul>
-        <li>
-          Certain plugin (e.g. adblock) on your device may pervent YouTube
-          video from being loaded onto your browser.
-        </li>
-        <li>
-          If the video loads but doesn't play, reload this page and click
-          on an area in the player EXCEPT the center large play button to
-          trigger an alternative play event.
-        </li>
-      </ul>
-    </p>
-    <a href="https://github.com/SunnyLi/videojs-ass/">Get back to repo</a>
-    <br><br><br>
+
+    <br><br>
   </body>
 </html>

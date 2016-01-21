@@ -1,21 +1,30 @@
 {
   "name": "videojs-ass",
-  "version": "0.2.1",
   "authors": [
     "Sunny Li"
   ],
   "description": "ASS/SSA subtitle overlay for videojs",
   "keywords": [
     "videojs",
+    "videojs-plugin",
     "subtitle",
     "ASS",
     "SSA"
   ],
   "license": "Apache-2.0",
+  "main": [
+    "./src/videojs.ass.js",
+    "./src/videojs.ass.css"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "example.html"
+  ],
   "dependencies": {
-    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.7.0/libjass.zip"
+    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.10.0/libjass.zip"
   },
   "devDependencies": {
-    "videojs": "~4.7.2"
+    "videojs": "5.x"
   }
 }

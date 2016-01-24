@@ -50,7 +50,19 @@
 
     function updateDisplayArea() {
       setTimeout(function () {
-        renderer.resize(player.el().offsetWidth, player.el().offsetHeight);
+        // player might not have information on video dimensions when using external providers
+        var videoWidth = options.videoWidth || player.videoWidth() || player.el().offsetWidth,
+          videoHeight = options.videoHeight || player.videoHeight() || player.el().offsetHeight,
+          videoOffsetWidth = player.el().offsetWidth,
+          videoOffsetHeight = player.el().offsetHeight,
+
+          ratio = Math.min(videoOffsetWidth / videoWidth, videoOffsetHeight / videoHeight),
+          subsWrapperWidth = videoWidth * ratio,
+          subsWrapperHeight = videoHeight * ratio,
+          subsWrapperLeft = (videoOffsetWidth - subsWrapperWidth) / 2,
+          subsWrapperTop = (videoOffsetHeight - subsWrapperHeight) / 2;
+
+        renderer.resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
       }, 100);
     }
     

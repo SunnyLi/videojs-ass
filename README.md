@@ -43,11 +43,15 @@ videojs('player_id', {
 | enableSvg   | true          | see [here][svg-effects] regarding SVG filter               |
 | fontMap     | -             | see [here][font-map] regarding using custom web fonts      |
 | fontMapById | -             | alternate to above, takes id and runs [this][font-map-el]  |
+| videoWidth  | -<sup>3</sup> | metadata to assist in determing optimal (cont below)       |
+| videoHeight | -<sup>3</sup> | (cont) subtitle letterboxing ratio                         |
 
 **Footnotes:**
 
 1. This property is required!
 2. Value can be negative
+3. Generally, you should set these values when using extrnal videojs providers
+   as they might not expose the video dimensions to the player.
 
 [svg-effects]: https://github.com/Arnavion/libjass/blob/v0.10.0/README.md#what-browser-and-javascript-features-does-libjass-need
 [font-map]: https://arnavion.github.io/libjass/api.xhtml#libjass.renderers.RendererSettings.fontMap

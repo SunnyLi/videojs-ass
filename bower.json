@@ -22,7 +22,7 @@
     "example.html"
   ],
   "dependencies": {
-    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.10.0/libjass.zip"
+    "libjass": "https://github.com/Arnavion/libjass/releases/download/v0.11.0/libjass.zip"
   },
   "devDependencies": {
     "videojs": "5.x"

@@ -4,20 +4,28 @@ Add **Advanced SubStation Alpha (ASS)** subtitles support to
 [videojs](https://github.com/videojs/video.js) using the
 [libjass](https://github.com/Arnavion/libjass) library.
 
-
-## Demo
-
-If you are not on a phone or using a very bad browser, come check out the demo
+Check out the demo
 [here](https://sunnyli.github.io/videojs-ass/example.html)
 
 
 ## Install
 
-You can get this plugin using either bower or npm:
+For plugin that supports videojs v5.x install using either:
 
-`bower install videojs-ass`
+- `bower install videojs-ass`
 
-`npm install videojs-ass`
+or
+
+- `npm install videojs-ass`
+
+For videojs v4:
+
+Just specify version to be within:
+
+```
+"videojs-ass": ">=0.3.0 < 0.5.0"
+```
+for bower or npm whichever you perfer using.
 
 
 ## Usage

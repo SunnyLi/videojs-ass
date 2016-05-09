@@ -58,7 +58,7 @@ videojs('player_id', {
 
 1. This property is required!
 2. Value can be negative
-3. Generally, you should set these values when using extrnal videojs providers
+3. Generally, you should set these values when using external videojs providers
    as they might not expose the video dimensions to the player.
 
 [svg-effects]: https://github.com/Arnavion/libjass/blob/v0.10.0/README.md#what-browser-and-javascript-features-does-libjass-need

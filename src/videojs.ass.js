@@ -14,6 +14,7 @@
       renderer = null,
       AssButton = null,
       AssButtonInstance = null,
+      OverlayComponent = null,
       VjsButton = null;
 
     if (!options.src) {
@@ -21,7 +22,17 @@
     }
 
     overlay.className = 'vjs-ass';
-    player.el().insertBefore(overlay, player.el().firstChild.nextSibling);
+
+    OverlayComponent = {
+      name: function () {
+        return 'AssOverlay';
+      },
+      el: function () {
+        return overlay;
+      }
+    }
+
+    player.addChild(OverlayComponent);
 
     function getCurrentTime() {
       return player.currentTime() - delay;
@@ -44,7 +55,7 @@
     function updateClockRate() {
       clock.setRate(player.playbackRate() * clockRate);
     }
-    
+
     updateClockRate();
     player.on('ratechange', updateClockRate);
 
@@ -65,7 +76,7 @@
         renderer.resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
       }, 100);
     }
-    
+
     if (player.fluid()) {
       window.addEventListener('resize', updateDisplayArea);
     }

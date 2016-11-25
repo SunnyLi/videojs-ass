@@ -113,12 +113,12 @@
         constructor: function (player, options) {
           options.name = options.name || 'assToggleButton';
           VjsButton.call(this, player, options);
-
-          this.addClass('vjs-ass-button');
-
-          this.on('click', this.onClick);
         },
-        onClick: function () {
+        buildCSSClass: function () {
+          var classes = VjsButton.prototype.buildCSSClass.call(this);
+          return 'vjs-ass-button ' + classes;
+        },
+        handleClick: function () {
           if (!this.hasClass('inactive')) {
             this.addClass('inactive');
             overlay.style.display = "none";

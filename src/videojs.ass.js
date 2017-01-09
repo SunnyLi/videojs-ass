@@ -77,16 +77,14 @@
       }, 100);
     }
 
-    if (player.fluid()) {
       window.addEventListener('resize', updateDisplayArea);
-    }
-
     player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
     player.on('dispose', function () {
       clock.disable();
+      window.removeEventListener('resize', updateDisplayArea);
     });
 
     libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(

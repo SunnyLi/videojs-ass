@@ -6,12 +6,15 @@
   'use strict';
 
   var vjs_ass = function (options) {
-    var overlay = document.createElement('div'),
-      clock = null,
+    var cur_id = 0,
+      id_count = 0,
+      overlay = document.createElement('div'),
+      clocks = [],
       clockRate = options.rate || 1,
       delay = options.delay || 0,
       player = this,
-      renderer = null,
+      renderers = [],
+      rendererSettings = null,
       AssButton = null,
       AssButtonInstance = null,
       OverlayComponent = null,
@@ -32,28 +35,28 @@
       }
     }
 
-    player.addChild(OverlayComponent);
+    player.addChild(OverlayComponent, {}, 3);
 
     function getCurrentTime() {
       return player.currentTime() - delay;
     }
 
-    clock = new libjass.renderers.AutoClock(getCurrentTime, 500);
+    clocks[cur_id] = new libjass.renderers.AutoClock(getCurrentTime, 500);
 
     player.on('play', function () {
-      clock.play();
+      clocks[cur_id].play();
     });
 
     player.on('pause', function () {
-      clock.pause();
+      clocks[cur_id].pause();
     });
 
     player.on('seeking', function () {
-      clock.seeking();
+      clocks[cur_id].seeking();
     });
 
     function updateClockRate() {
-      clock.setRate(player.playbackRate() * clockRate);
+      clocks[cur_id].setRate(player.playbackRate() * clockRate);
     }
 
     updateClockRate();
@@ -73,23 +76,25 @@
           subsWrapperLeft = (videoOffsetWidth - subsWrapperWidth) / 2,
           subsWrapperTop = (videoOffsetHeight - subsWrapperHeight) / 2;
 
-        renderer.resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
+        renderers[cur_id].resize(subsWrapperWidth, subsWrapperHeight, subsWrapperLeft, subsWrapperTop);
       }, 100);
     }
 
-      window.addEventListener('resize', updateDisplayArea);
+    window.addEventListener('resize', updateDisplayArea);
     player.on('loadedmetadata', updateDisplayArea);
     player.on('resize', updateDisplayArea);
     player.on('fullscreenchange', updateDisplayArea);
 
     player.on('dispose', function () {
-      clock.disable();
+      for (var i = 0; i < clocks.length; i++) {
+        clocks[i].disable();
+      }
       window.removeEventListener('resize', updateDisplayArea);
     });
 
+    rendererSettings = new libjass.renderers.RendererSettings();
     libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(
       function (ass) {
-        var rendererSettings = new libjass.renderers.RendererSettings();
         if (options.hasOwnProperty('enableSvg')) {
           rendererSettings.enableSvg = options.enableSvg;
         }
@@ -100,9 +105,28 @@
             .makeFontMapFromStyleElement(document.getElementById(options.fontMapById));
         }
 
-        renderer = new libjass.renderers.WebRenderer(ass, clock, overlay, rendererSettings);
+        renderers[cur_id] = new libjass.renderers.WebRenderer(ass, clocks[cur_id], overlay, rendererSettings);
       }
     );
+
+    /*
+      Experimental API use at your own risk!!
+    */
+    function loadNewSubtitle(url) {
+      renderers[cur_id]._removeAllSubs();
+      renderers[cur_id]._preRenderedSubs.clear();
+      renderers[cur_id].clock.disable();
+
+      libjass.ASS.fromUrl(url, libjass.Format.ASS).then(
+        function (ass) {
+          cur_id = ++id_count;
+          clocks[cur_id] = new libjass.renderers.AutoClock(getCurrentTime, 500);
+          renderers[cur_id] = new libjass.renderers.WebRenderer(ass, clocks[cur_id], overlay, rendererSettings);
+          updateDisplayArea();
+          clocks[cur_id].play();
+        }
+      );
+    };
 
     // Visibility Toggle Button
     if (!options.hasOwnProperty('button') || options.button) {
@@ -136,6 +160,10 @@
         );
       });
     }
+
+    return {
+      loadNewSubtitle: loadNewSubtitle
+    };
   };
 
   videojs.plugin('ass', vjs_ass);

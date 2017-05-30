@@ -25,7 +25,7 @@ Just specify version to be within:
 ```
 "videojs-ass": ">=0.3.0 < 0.5.0"
 ```
-for bower or npm whichever you perfer using.
+for bower or npm whichever you prefer using.
 
 
 ## Usage

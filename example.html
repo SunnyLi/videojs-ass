@@ -32,13 +32,28 @@
         nativeControlsForTouch: false,
         width: 640,
         height: 360,
-        plugins: {
-          ass: {
-            'src': ["subs/os.ass"]
-          }
-        },
+        // fluid: true,
+        // plugins: {
+        //   ass: {
+        //     'src': ["subs/os.ass"],
+        //     videoWidth: 640,
+        //     videoHeight: 360,
+        //     // enableSvg: false
+        //   }
+        // },
         playbackRates: [0.5, 1, 1.5, 2]
       });
+
+      var vjs = videojs('player');
+      // initialize the plugin this way to access internal methods
+      var vjs_ass = vjs.ass({
+        'src': ["subs/os.ass"],
+        videoWidth: 640,
+        videoHeight: 360,
+        // enableSvg: false
+      })
+      // you will then be able to use the following js to switch subtitle
+      // vjs_ass.loadNewSubtitle('URL HERE')
     </script>
   </body>
 </html>

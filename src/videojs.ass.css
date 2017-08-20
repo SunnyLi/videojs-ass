@@ -7,17 +7,3 @@
 
   pointer-events: none;
 }
-
-.vjs-default-skin .vjs-ass-button {
-  cursor: pointer;
-}
-
-.vjs-default-skin .vjs-ass-button:before {
-  font-family: VideoJS;
-  content: '\f10c';
-}
-
-.vjs-default-skin .vjs-ass-button.inactive {
-  color: grey;
-}
-

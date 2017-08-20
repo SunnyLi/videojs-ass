@@ -16,7 +16,9 @@
       renderers = [],
       rendererSettings = null,
       OverlayComponent = null,
-	  switching = false;
+      assTrackIdMap = {},
+      tracks = player.textTracks(),
+      isTrackSwitching = false;
 
     if (!options.src) {
       return;
@@ -32,24 +34,6 @@
         return overlay;
       }
     }
-	
-	var tracks = player.textTracks();
-	var previousActiveTrack = null;
-	
-	var assTracks = {};
-	
-	tracks.on('change', function() {
-		if(!switching) {
-			var activeTrack = this.tracks_.find(track => track.mode == 'showing');
-			if(activeTrack && activeTrack != previousActiveTrack)
-			{
-				overlay.style.display = '';
-				switchTo(assTracks[activeTrack.language]);
-			}
-			else if(!activeTrack && activeTrack != previousActiveTrack) overlay.style.display = 'none';
-			previousActiveTrack = activeTrack;
-		}
-	})
 
     player.addChild(OverlayComponent, {}, 3);
 
@@ -108,6 +92,23 @@
       window.removeEventListener('resize', updateDisplayArea);
     });
 
+    tracks.on('change', function () {
+      if (isTrackSwitching) {
+        return;
+      }
+
+      var activeTrack = this.tracks_.find(function (track) {
+        return track.mode === 'showing';
+      });
+
+      if (activeTrack) {
+        overlay.style.display = '';
+        switchTrackTo(assTrackIdMap[activeTrack.language + activeTrack.label]);
+      } else {
+        overlay.style.display = 'none';
+      }
+    })
+
     rendererSettings = new libjass.renderers.RendererSettings();
     libjass.ASS.fromUrl(options.src, libjass.Format.ASS).then(
       function (ass) {
@@ -121,48 +122,73 @@
             .makeFontMapFromStyleElement(document.getElementById(options.fontMapById));
         }
 
-		addTrack(options.src,{label:options.label, srclang:options.srclang, switchImmediately: true});
+        addTrack(options.src, { label: options.label, srclang: options.srclang, switchImmediately: true });
         renderers[cur_id] = new libjass.renderers.WebRenderer(ass, clocks[cur_id], overlay, rendererSettings);
       }
     );
-	
-	function addTrack(url,opts) {
-      var newTrack = player.addRemoteTextTrack({src:"",kind:'subtitles', label:opts.label, srclang:opts.srclang, default: opts.switchImmediately});
-      assTracks[opts.srclang] = cur_id;
-	  if(opts.switchImmediately)
-	  {
-		  //Using a variable to prevent the "change" event from firing
-		  switching = true;
-		  var trackList = player.textTracks();
-		  for(var t = 0; t < trackList.length; t++) {
-			  if(trackList[t].src == newTrack.src && trackList[t].language == newTrack.srclang) trackList[t].mode = "showing";
-			  else trackList[t].mode = "hidden";
-		  }
-		  switching = false;
-	  }
-	}
-	
-	function switchTo(new_id) {
+
+    function addTrack(url, opts) {
+      var newTrack = player.addRemoteTextTrack({
+        src: "",
+        kind: 'subtitles',
+        label: opts.label || 'ASS #' + cur_id,
+        srclang: opts.srclang || 'vjs-ass-' + cur_id,
+        default: opts.switchImmediately
+      });
+
+      assTrackIdMap[newTrack.srclang + newTrack.label] = cur_id;
+
+      if(!opts.switchImmediately) {
+        // fix multiple track selected highlight issue
+        for (var t = 0; t < tracks.length; t++) {
+          if (tracks[t].mode === "showing") {
+            tracks[t].mode = "showing";
+          }
+        }
+        return;
+      }
+
+      isTrackSwitching = true;
+      for (var t = 0; t < tracks.length; t++) {
+        if (tracks[t].label == newTrack.label && tracks[t].language == newTrack.srclang) {
+          if (tracks[t].mode !== "showing") {
+            tracks[t].mode = "showing";
+          }
+        } else {
+          if (tracks[t].mode === "showing") {
+            tracks[t].mode = "disabled";
+          }
+        }
+      }
+      isTrackSwitching = false;
+    }
+
+    function switchTrackTo(selected_track_id) {
       renderers[cur_id]._removeAllSubs();
       renderers[cur_id]._preRenderedSubs.clear();
       renderers[cur_id].clock.disable();
-	  	  
-	  cur_id = new_id;
-	  	  
-	  renderers[cur_id].clock.enable();
-	  updateDisplayArea();
-	  clocks[cur_id].play();
-	}
-	
+
+      cur_id = selected_track_id;
+      if (cur_id == undefined) {
+        // case when we switche to regular non ASS closed captioning
+        return;
+      }
+
+      renderers[cur_id].clock.enable();
+      updateDisplayArea();
+      clocks[cur_id].play();
+    }
+
     /*
       Experimental API use at your own risk!!
     */
-    function loadNewSubtitle(url,label,srclang,switchImmediately) {
-      if(switchImmediately) {
-	     renderers[cur_id]._removeAllSubs();
-         renderers[cur_id]._preRenderedSubs.clear();
-         renderers[cur_id].clock.disable();
-	  }
+    function loadNewSubtitle(url, label, srclang, switchImmediately) {
+      var old_id = cur_id;
+      if (switchImmediately) {
+        renderers[cur_id]._removeAllSubs();
+        renderers[cur_id]._preRenderedSubs.clear();
+        renderers[cur_id].clock.disable();
+      }
 
       libjass.ASS.fromUrl(url, libjass.Format.ASS).then(
         function (ass) {
@@ -170,18 +196,23 @@
           clocks[cur_id] = new libjass.renderers.AutoClock(getCurrentTime, 500);
           renderers[cur_id] = new libjass.renderers.WebRenderer(ass, clocks[cur_id], overlay, rendererSettings);
           updateDisplayArea();
-          if(switchImmediately) clocks[cur_id].play();
-		  else {
-			  renderers[cur_id]._removeAllSubs();
-        	  renderers[cur_id]._preRenderedSubs.clear();
-         	  renderers[cur_id].clock.disable();
-		  }
-		  addTrack(options.src,{label:label, srclang:srclang, switchImmediately: switchImmediately});
+
+          if (switchImmediately) {
+            clocks[cur_id].play();
+          } else {
+            renderers[cur_id]._removeAllSubs();
+            renderers[cur_id]._preRenderedSubs.clear();
+            renderers[cur_id].clock.disable();
+          }
+
+          addTrack(options.src, { label: label, srclang: srclang, switchImmediately: switchImmediately });
+
+          if (!switchImmediately) {
+            cur_id = old_id;
+          }
         }
       );
     };
-	
-	
 
     return {
       loadNewSubtitle: loadNewSubtitle
